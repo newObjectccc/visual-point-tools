@@ -7,7 +7,6 @@
     "moduleResolution": "nodenext",
     "module": "NodeNext",
     "rootDir": "./",
-    "outDir": "./dist",
     "target": "ES2018",
     "baseUrl": ".",
     "strict": true,
