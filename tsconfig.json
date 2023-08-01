@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "lib": ["esnext", "dom"],
+    "moduleResolution": "nodenext",
+    "module": "NodeNext",
+    "rootDir": "./",
+    "outDir": "./dist",
+    "target": "ES2018",
+    "baseUrl": ".",
+    "strict": true,
+  },
+  "exclude": ["node_modules", "./**/dist"],
+}
