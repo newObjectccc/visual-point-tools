@@ -1,0 +1,19 @@
+*[data-vp] {
+  position: relative;
+ 
+}
+
+*[data-vp]::after {
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  content: " ";
+  width: 10px;
+  height: 10px;
+  background: red;
+  border-radius: 50%;
+}
+
+*[data-vpp] {
+
+}

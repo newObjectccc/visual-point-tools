@@ -7,7 +7,8 @@
     "packages/*"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx rollup --config ./rollup.config.js"
   },
   "keywords": [],
   "author": "",
@@ -15,5 +16,13 @@
   "dependencies": {
     "@types/node": "^20.4.5",
     "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.9",
+    "@babel/preset-env": "^7.22.9",
+    "rollup": "^3.27.0",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0"
   }
 }
