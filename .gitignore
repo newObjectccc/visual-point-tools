@@ -9,4 +9,5 @@ dist
 .vscode
 .eslintcache
 examples/**/yarn.lock
+examples
 package-lock.json
