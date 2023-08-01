@@ -8,7 +8,7 @@ interface Reporter {
   reportIdle: (...args: any[]) => void
 }
 
-interface WebReporterOptions {
+export interface WebReporterOptions {
   fetcher?: UploadCallback
   concurrent?: number
   finalTime?: number
@@ -16,7 +16,7 @@ interface WebReporterOptions {
   reportUrl?: string
   customOptionFetcher?: RequestInit
 }
-export class WebReporter implements Reporter {
+export default class WebReporter implements Reporter {
   private static instance: WebReporter
   private concurrentRequests: number
   private reportQueue: unknown[]
