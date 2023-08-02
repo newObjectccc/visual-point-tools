@@ -124,7 +124,7 @@ export default class WebReporter implements Reporter {
     }
 
     // 执行
-    if ('requestIdleCallback' in globalThis) {
+    if ('requestIdleCallback' in (globalThis ?? window)) {
       window.requestIdleCallback(idlehandler, {timeout: this.finalTime})
     }
   }
