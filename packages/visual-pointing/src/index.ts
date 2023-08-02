@@ -20,7 +20,7 @@ export default class VisualPoint {
   private keyValue: KeyValueType
 
   constructor({className = '__vp-visual', keyValue = {key: '*[data-vpkey]', value: '*[data-vpval]'}, fetcher}: VisualPointOptions) {
-    const visualIns = new Visual({className, dataset: keyValue.key})
+    const visualIns = new Visual({className, keyValue})
     const pointingIns = new Pointing({className, fetcher, keyValue})
     this.className = className
     this.keyValue = keyValue

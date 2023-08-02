@@ -6,22 +6,28 @@ const workspaceRoot = path.resolve(__dirname)
 const packagesDir = path.resolve(workspaceRoot, 'packages')
 
 const packageConfigs = [
-  {
-    name: 'logger',
-    input: path.resolve(packagesDir, 'logger/src/index.ts'),
-    output: path.resolve(packagesDir, 'logger/dist/bundle.js'),
-    format: 'esm'
-  },
-  {
-    name: 'reporter',
-    input: path.resolve(packagesDir, 'reporter/src/index.ts'),
-    output: path.resolve(packagesDir, 'reporter/dist/bundle.js'),
-    format: 'esm'
-  },
+  // {
+  //   name: 'logger',
+  //   input: path.resolve(packagesDir, 'logger/src/index.ts'),
+  //   output: path.resolve(packagesDir, 'logger/dist/bundle.js'),
+  //   format: 'esm'
+  // },
+  // {
+  //   name: 'reporter',
+  //   input: path.resolve(packagesDir, 'reporter/src/index.ts'),
+  //   output: path.resolve(packagesDir, 'reporter/dist/bundle.js'),
+  //   format: 'esm'
+  // },
   {
     name: 'visual-pointing',
     input: path.resolve(packagesDir, 'visual-pointing/src/index.ts'),
     output: path.resolve(packagesDir, 'visual-pointing/dist/bundle.js'),
+    format: 'esm'
+  },
+  {
+    name: 'log-report',
+    input: path.resolve(packagesDir, 'log-report/src/index.ts'),
+    output: path.resolve(packagesDir, 'log-report/dist/bundle.js'),
     format: 'esm'
   }
 ]

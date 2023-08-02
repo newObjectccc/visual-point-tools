@@ -3,3 +3,4 @@ packages:
   - "reporter"
   - "tools"
   - "visual-pointing"
+  - "log-report"

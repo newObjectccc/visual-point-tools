@@ -1,22 +1,24 @@
+import { KeyValueType } from "packages/visual-pointing/src/pointing";
+
 interface VisualOptions {
   className: string;
-  dataset: string
+  keyValue: KeyValueType
 }
 export default class Visual {
   private className: string
-  private dataset: string
+  private keyValue: KeyValueType
 
-  constructor({className, dataset}: VisualOptions) {
+  constructor({className, keyValue}: VisualOptions) {
     this.className = className
-    this.dataset = dataset
+    this.keyValue = keyValue
   }
   
   appendVisualDom() {
-    const allNodesWithDatasetVp: NodeListOf<HTMLElement> = document.querySelectorAll(this.dataset)
+    const allNodesWithDatasetVp: NodeListOf<HTMLElement> = document.querySelectorAll(this.keyValue.key)
     const visualSpan = document.createElement('span')
     // TODO: cutom style
     visualSpan.classList.add(this.className)
-    visualSpan.innerHTML = '0'
+    visualSpan.innerHTML = this.keyValue.value === 'true' ? 'A' : 'D'
     visualSpan.style.position = 'absolute'
     visualSpan.style.right = '-9px'
     visualSpan.style.top = '-9px'
@@ -26,7 +28,7 @@ export default class Visual {
     visualSpan.style.lineHeight = '18px'
     visualSpan.style.fontSize = '9px'
     visualSpan.style.textAlign = 'center'
-    visualSpan.style.background = 'rgb(238, 55, 55)'
+    visualSpan.style.background = this.keyValue.value === 'true' ? 'rgb(55, 205, 55)' : 'rgb(205, 55, 55)'
     visualSpan.style.borderRadius = '50%'
     visualSpan.style.cursor = 'pointer'
     allNodesWithDatasetVp.forEach((_node, _key, _parent) => {
