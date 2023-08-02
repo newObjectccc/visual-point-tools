@@ -15,6 +15,7 @@ export interface WebReporterOptions {
   afterFetcher?: UploadCallback
   reportUrl?: string
   customOptionFetcher?: RequestInit
+  retryTimesLimit?: number
 }
 export default class WebReporter implements Reporter {
   private static instance: WebReporter
@@ -30,7 +31,7 @@ export default class WebReporter implements Reporter {
     if (!WebReporter.instance) {
       WebReporter.instance = this
     }
-    const {afterFetcher, fetcher, concurrent, finalTime, reportUrl, customOptionFetcher} = options
+    const {afterFetcher, fetcher, concurrent, finalTime, reportUrl, customOptionFetcher, retryTimesLimit} = options
     if (reportUrl && !urlRegExp.test(reportUrl)) {
       if (process.env.NODE_ENV !== 'production') {
         throw new Error('WebReporter: field reportUrlis invalid, it should be a http/https/ftp uri')
@@ -52,7 +53,7 @@ export default class WebReporter implements Reporter {
     this.afterFetcher = afterFetcher || ((res: any) => res)
     this.url = reportUrl
     this.retryTimes = 0
-    this.retryTimesLimit = 3
+    this.retryTimesLimit = retryTimesLimit ?? 3
     return WebReporter.instance
   }
 
