@@ -21,13 +21,13 @@ const packageConfigs = [
   {
     name: 'visual-pointing',
     input: path.resolve(packagesDir, 'visual-pointing/src/index.ts'),
-    output: path.resolve(packagesDir, 'visual-pointing/dist/bundle.js'),
+    output: path.resolve(packagesDir, 'visual-pointing/dist/index.js'),
     format: 'esm'
   },
   {
     name: 'log-report',
     input: path.resolve(packagesDir, 'log-report/src/index.ts'),
-    output: path.resolve(packagesDir, 'log-report/dist/bundle.js'),
+    output: path.resolve(packagesDir, 'log-report/dist/index.js'),
     format: 'esm'
   }
 ]
