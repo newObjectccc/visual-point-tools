@@ -13,13 +13,15 @@ export default class Visual {
     this.keyValue = keyValue
   }
   
+  // 只是用于预埋点的开关状态
   appendVisualDom() {
-    const allNodesWithDatasetVp: NodeListOf<HTMLElement> = document.querySelectorAll(this.keyValue.key)
+    const allNodesWithDatasetVp: NodeListOf<HTMLElement> = document.querySelectorAll(`*[data-${this.keyValue.key}]`)
     allNodesWithDatasetVp.forEach((_node, _key, _parent) => {
+      const vpValue = _node.getAttribute(`data-${this.keyValue.value}`)
       // TODO: cutom style
       const visualSpan = document.createElement('span')
       visualSpan.classList.add(this.className)
-      visualSpan.innerHTML = this.keyValue.value === 'true' ? 'A' : 'D'
+      visualSpan.innerHTML = vpValue?.toString() === 'true' ? 'A' : 'D'
       visualSpan.style.position = 'absolute'
       visualSpan.style.right = '-9px'
       visualSpan.style.top = '-9px'
@@ -29,11 +31,21 @@ export default class Visual {
       visualSpan.style.lineHeight = '18px'
       visualSpan.style.fontSize = '9px'
       visualSpan.style.textAlign = 'center'
-      visualSpan.style.background = this.keyValue.value === 'true' ? 'rgb(55, 205, 55)' : 'rgb(205, 55, 55)'
+      visualSpan.style.background = vpValue?.toString() === 'true' ? 'rgb(55, 205, 55)' : 'rgb(205, 55, 55)'
       visualSpan.style.borderRadius = '50%'
       visualSpan.style.cursor = 'pointer'
-      _node?.appendChild(visualSpan)
       _node.style.position = 'relative'
+      _node?.appendChild(visualSpan)
+    })
+  }
+
+  // change 预埋点状态
+  changeVisualDomVpValue(dataKey: string, value: boolean|string) {
+    if (!dataKey) return
+    const val = value.toString()
+    const domList = document.querySelectorAll(`*[data-${dataKey}]`)
+    domList.forEach((_node, _key, _parent) => {
+      _node.setAttribute(`data-${this.keyValue.value}`, val)
     })
   }
 }
