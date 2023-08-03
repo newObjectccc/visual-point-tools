@@ -120,12 +120,16 @@ export default class WebReporter implements Reporter {
       // 清空队列则跳出递归
       if (this.reportQueue.length === 0) return
       // 时间不够就下一次 loop
-      window.requestIdleCallback(idlehandler, {timeout: this.finalTime})
+      window.requestIdleCallback(idlehandler)
     }
 
     // 执行
     if ('requestIdleCallback' in (globalThis ?? window)) {
-      window.requestIdleCallback(idlehandler, {timeout: this.finalTime})
+      if (this.finalTime > 0) {
+        window.requestIdleCallback(idlehandler, {timeout: this.finalTime})
+      } else {
+        window.requestIdleCallback(idlehandler)
+      }
     }
   }
 
