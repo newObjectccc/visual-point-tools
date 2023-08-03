@@ -145,6 +145,11 @@ export default class WebLogger<T> implements Logger {
     return this.logs
   }
 
+  // 清空 logs
+  clearLogsQueue() {
+    this.logs = []
+  }
+
   // 获取当前实例 logType
   getLogType() {
     return this.logType

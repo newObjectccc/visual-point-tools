@@ -46,12 +46,9 @@ export default class LogReport<T extends Object> {
   }
 
   report() {
-    const logList = []
-    while(this.__logger?.getLogsSize()! > 0) {
-      const log = this.__logger?.getCurrnetLog()
-      logList.push(log)
-    }
+    const logList = this.__logger?.getLogsQueue() ?? []
     this.__reporter?.reportIdle(...logList)
+    this.__logger?.clearLogsQueue()
   }
 
   changeUrl(url: string) {
