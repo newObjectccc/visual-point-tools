@@ -46,7 +46,12 @@ export default class LogReport<T extends Object> {
   }
 
   report() {
-    const logList = this.__logger?.getLogsQueue() ?? []
+    const logList = []
+    let log = null
+    do {
+      log = this.__logger?.getCurrnetLog()
+      logList.push(log)
+    } while(log)
     this.__reporter?.reportIdle(...logList)
   }
 
