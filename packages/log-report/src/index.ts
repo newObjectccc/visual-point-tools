@@ -18,7 +18,6 @@ interface LogReportOptions {
 export default class LogReport<T extends Object> {
   private url: string
   private type: LogType
-  private logs?: Logs<T>
   private fetcher?: LogReportFetcherType<T>
   private afterFetcher?: LogReportFetcherType<T>
   private customOptionFetcher?: RequestInit
@@ -36,7 +35,6 @@ export default class LogReport<T extends Object> {
     try {
       this.__logger = new WebLogger<T>({type})
       this.__reporter = new WebReporter({reportUrl: url, customOptionFetcher, afterFetcher, concurrent, fetcher, finalTime, retryTimesLimit})
-      this.logs = this.__logger.getLogsQueue()
     } catch (error) {
       if (process.env.NODE_ENV !== 'production') {
         console.error('LogReport Error: ', error)
@@ -46,9 +44,12 @@ export default class LogReport<T extends Object> {
   }
 
   report() {
-    const logList = this.__logger?.getLogsQueue() ?? []
+    const logList = []
+    while(this.__logger?.getLogsSize()! > 0) {
+      const log = this.__logger?.getCurrnetLog()
+      logList.push(log)
+    }
     this.__reporter?.reportIdle(...logList)
-    this.__logger?.clearLogsQueue()
   }
 
   changeUrl(url: string) {
