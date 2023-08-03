@@ -47,11 +47,10 @@ export default class LogReport<T extends Object> {
 
   report() {
     const logList = []
-    let log = null
-    do {
-      log = this.__logger?.getCurrnetLog()
+    while(this.__logger?.getLogsSize()! > 0) {
+      const log = this.__logger?.getCurrnetLog()
       logList.push(log)
-    } while(log)
+    }
     this.__reporter?.reportIdle(...logList)
   }
 
