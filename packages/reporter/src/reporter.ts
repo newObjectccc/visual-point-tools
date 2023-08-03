@@ -110,11 +110,8 @@ export default class WebReporter implements Reporter {
     // 递归调度
     const idlehandler = async (idleDeadline: IdleDeadline) => {
       const stillTime = idleDeadline.timeRemaining()
-      const queueSize = this.reportQueue.length
       // 调度策略
-      if (stillTime < 50 && stillTime > 5 && queueSize <= 3) {
-        await concurrentReportHandler()
-      } else if (stillTime >= 50) {
+      if (stillTime < 50 && stillTime > 5) {
         await concurrentReportHandler()
       }
       // 清空队列则跳出递归
