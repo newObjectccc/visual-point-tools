@@ -44,7 +44,7 @@ export default class WebReporter implements Reporter {
     }
     this.concurrentRequests = concurrent ?? 1
     this.reportQueue = []
-    this.finalTime = finalTime ?? 60 * 1000
+    this.finalTime = finalTime ?? 0
     if (customOptionFetcher) {
       this.fetcher = fetcherFactory(customOptionFetcher)
     } else {
@@ -112,7 +112,7 @@ export default class WebReporter implements Reporter {
       const stillTime = idleDeadline.timeRemaining()
       const queueSize = this.reportQueue.length
       // 调度策略
-      if (stillTime < 50 && stillTime > 10 && queueSize <= 3) {
+      if (stillTime < 50 && stillTime > 5 && queueSize <= 3) {
         await concurrentReportHandler()
       } else if (stillTime >= 50) {
         await concurrentReportHandler()
