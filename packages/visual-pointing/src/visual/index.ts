@@ -21,7 +21,7 @@ export default class Visual {
       // TODO: cutom style
       const visualSpan = document.createElement('span')
       visualSpan.classList.add(this.className)
-      visualSpan.innerHTML = vpValue?.toString() === 'true' ? 'A' : 'D'
+      visualSpan.style.content = vpValue?.toString() === 'true' ? 'A' : 'D'
       visualSpan.style.position = 'absolute'
       visualSpan.style.right = '-9px'
       visualSpan.style.top = '-9px'
@@ -47,5 +47,21 @@ export default class Visual {
     domList.forEach((_node, _key, _parent) => {
       _node.setAttribute(`data-${this.keyValue.value}`, val)
     })
+  }
+
+  // 注册样式
+  registerVisualStyles() {
+    const vpStyles = document.createElement('style')
+    vpStyles.innerHTML = `
+      *[data-${this.keyValue.value}="true"] {
+        background-color: rgb(55, 205, 55);
+        content: "A";
+      }
+      *[data-${this.keyValue.value}="false"] {
+        background-color: rgb(205, 55, 55);
+        content: "D";
+      }
+    `
+    document.head.appendChild(vpStyles)
   }
 }

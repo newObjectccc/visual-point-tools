@@ -7,7 +7,6 @@ interface VisualPointOptions {
   className?: string
   keyValue?: KeyValueType
   fetcher: FetcherType
-  pointingHandlerCallback?: PointingHandlerCallback // pointing请求后，决定是否修改 vpval 的值
 }
 /**
  * [VisualPoint description]
@@ -19,20 +18,19 @@ export default class VisualPoint {
   private __visualInstance
   private className: string
   private keyValue: KeyValueType
-  private pointingHandlerCallback?: PointingHandlerCallback
 
-  constructor({pointingHandlerCallback, className = 'vp__span-visual', keyValue = {key: 'vpkey', value: 'vpval'}, fetcher}: VisualPointOptions) {
+  constructor({className = 'vp__span-visual', keyValue = {key: 'vpkey', value: 'vpval'}, fetcher}: VisualPointOptions) {
     const visualIns = new Visual({className, keyValue})
     const pointingIns = new Pointing({className, fetcher, keyValue})
     this.className = className
     this.keyValue = keyValue
     this.__pointingInstance = pointingIns
     this.__visualInstance = visualIns
-    this.pointingHandlerCallback = pointingHandlerCallback
   }
 
-  registerClickListener() {
+  registerListenerAndStyles() {
     this.__pointingInstance.ponintingClickListener()
+    this.__visualInstance.registerVisualStyles()
   }
 
   appendVisualPointDom() {
